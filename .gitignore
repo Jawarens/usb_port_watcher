@@ -1,0 +1,26 @@
+# Python virtual environment
+.venv/
+env/
+venv/
+
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyInstaller / distribution
+build/
+dist/
+*.spec
+
+# Exported logs
+*.csv
+*.json
+!mcp_config.json
+
+# IDE & OS files
+.vscode/
+.idea/
+*.swp
+*.bak
+Thumbs.db
