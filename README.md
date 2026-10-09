@@ -6,6 +6,12 @@ A lightweight, real-time Windows desktop application for monitoring USB ports, c
 ![GUI](https://img.shields.io/badge/GUI-PyQt6-green.svg)
 ![OS](https://img.shields.io/badge/Platform-Windows_10_|_11-0078D6.svg)
 
+<p align="center">
+  <a href="https://ko-fi.com/F0T028FQJQ">
+    <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi" />
+  </a>
+</p>
+
 ---
 
 ## ✨ Key Features
@@ -78,3 +84,11 @@ usb_port_watcher/
     ├── inspector_panel.py # Deep device inspector & driver helper panel
     └── main_window.py   # Main window with tabs, event table, and toolbar
 ```
+
+---
+
+## ☕ Support the Project
+
+If this project saves you time or helps you troubleshoot USB hardware issues, please consider supporting development!
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F0T028FQJQ)
