@@ -1,14 +1,12 @@
-import os
-from datetime import datetime
-from typing import List, Dict, Optional
+from typing import List, Dict
 
 from PyQt6.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QSplitter,
     QTableWidget, QTableWidgetItem, QHeaderView, QTabWidget,
     QPushButton, QLabel, QFileDialog, QMessageBox, QMenu, QAbstractItemView
 )
-from PyQt6.QtCore import Qt, QTimer
-from PyQt6.QtGui import QColor, QFont, QAction, QIcon
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QFont
 
 from device_model import UsbDevice, UsbEvent
 from win32_usb import UsbWatcherThread, enumerate_usb_devices
@@ -289,7 +287,6 @@ class MainWindow(QMainWindow):
         self.table_events.setItem(row, 4, QTableWidgetItem(loc_str))
 
         # 5: Driver Health
-        prob_title, _ = dev.problem_description
         if dev.problem_code == 0:
             h_badge = StatusBadge("Normal", "success")
         elif dev.problem_code == 28:
@@ -438,7 +435,6 @@ class MainWindow(QMainWindow):
         act_google = menu.addAction("🔍 Search Google for Driver")
 
         action = menu.exec(self.cursor().pos())
-        clipboard = self.topLevelWidget().windowHandle().screen() if False else None
 
         from PyQt6.QtWidgets import QApplication
         cb = QApplication.clipboard()

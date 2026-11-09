@@ -81,6 +81,7 @@ user32 = ctypes.windll.user32
 advapi32 = ctypes.windll.advapi32
 
 HDEVINFO = ctypes.c_void_p
+INVALID_HANDLE_VALUE = ctypes.c_void_p(-1).value
 
 setupapi.SetupDiGetClassDevsW.argtypes = [ctypes.c_void_p, wintypes.LPCWSTR, wintypes.HWND, wintypes.DWORD]
 setupapi.SetupDiGetClassDevsW.restype = HDEVINFO
@@ -141,6 +142,12 @@ user32.DestroyWindow.restype = wintypes.BOOL
 user32.PostMessageW.argtypes = [wintypes.HWND, wintypes.UINT, wintypes.WPARAM, wintypes.LPARAM]
 user32.PostMessageW.restype = wintypes.BOOL
 
+user32.RegisterClassExW.argtypes = [ctypes.c_void_p]
+user32.RegisterClassExW.restype = wintypes.ATOM
+
+user32.UnregisterClassW.argtypes = [wintypes.LPCWSTR, wintypes.HINSTANCE]
+user32.UnregisterClassW.restype = wintypes.BOOL
+
 
 def _get_registry_string(hdev: HDEVINFO, devinfo: SP_DEVINFO_DATA, prop_id: int) -> str:
     buf_size = wintypes.DWORD(0)
@@ -177,7 +184,7 @@ def _read_driver_registry_info(hdev: HDEVINFO, devinfo: SP_DEVINFO_DATA) -> dict
         "MatchingDeviceId": "",
     }
     hkey = setupapi.SetupDiOpenDevRegKey(hdev, ctypes.byref(devinfo), DICS_FLAG_GLOBAL, 0, DIREG_DRV, KEY_READ)
-    if hkey and hkey != -1:
+    if hkey not in (None, 0, -1, INVALID_HANDLE_VALUE):
         for val_name in ["DriverVersion", "DriverDate", "DriverProviderName", "MatchingDeviceId", "ProviderName"]:
             buf_size = wintypes.DWORD(0)
             dwType = wintypes.DWORD(0)
@@ -200,7 +207,7 @@ def enumerate_usb_devices() -> Dict[str, UsbDevice]:
     """Enumerate all currently connected USB devices on the system."""
     devices: Dict[str, UsbDevice] = {}
     hdev = setupapi.SetupDiGetClassDevsW(None, "USB", None, DIGCF_PRESENT | DIGCF_ALLCLASSES)
-    if not hdev or hdev == -1:
+    if hdev in (None, 0, -1, INVALID_HANDLE_VALUE):
         return devices
 
     devinfo = SP_DEVINFO_DATA()
@@ -345,7 +352,7 @@ class UsbWatcherThread(QThread):
             0x00000000 # DEVICE_NOTIFY_WINDOW_HANDLE
         )
 
-        self.log_message.emit(f"USB Watcher active. Monitoring USB hardware events...")
+        self.log_message.emit("USB Watcher active. Monitoring USB hardware events...")
 
         # Run Win32 Message Loop
         class MSG(ctypes.Structure):

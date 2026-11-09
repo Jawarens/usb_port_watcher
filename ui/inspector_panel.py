@@ -1,12 +1,11 @@
-import os
 import subprocess
 import urllib.parse
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QScrollArea,
-    QFrame, QGridLayout, QTextEdit, QApplication
+    QFrame, QGridLayout
 )
 from PyQt6.QtCore import Qt, QUrl
-from PyQt6.QtGui import QDesktopServices, QFont
+from PyQt6.QtGui import QDesktopServices
 
 from device_model import UsbDevice
 from ui.widgets import StatusBadge, CopyButton

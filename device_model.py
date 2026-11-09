@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import List, Optional
+from typing import List
 
 # Windows Configuration Manager Problem Codes
 CM_PROBLEM_CODES = {

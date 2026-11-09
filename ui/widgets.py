@@ -2,7 +2,7 @@ from PyQt6.QtWidgets import (
     QWidget, QLabel, QPushButton, QHBoxLayout, QVBoxLayout, QFrame, QLineEdit, QRadioButton, QButtonGroup, QApplication
 )
 from PyQt6.QtCore import Qt, QTimer, pyqtSignal
-from PyQt6.QtGui import QColor, QFont
+from PyQt6.QtGui import QFont
 
 class StatusBadge(QLabel):
     """Clean pill badge with color coding for connection state and Windows problem codes."""
