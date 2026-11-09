@@ -56,13 +56,22 @@ A lightweight, real-time Windows desktop application for monitoring USB ports, c
 
 ## 🚀 Quick Start
 
-### Option A: One-Click Launch
-Double-click [`run.bat`](file:///c:/Users/Jawarens/Documents/GitHub/usb_port_watcher/run.bat).
+### Option A: One-Click Launch (Windows)
+Double-click `run.bat` in the repository root directory (automatically sets up dependencies if needed and launches the application).
 
 ### Option B: Terminal Launch
 ```powershell
-cd c:\Users\Jawarens\Documents\GitHub\usb_port_watcher
-.\.venv\Scripts\python.exe main.py
+# Clone the repository
+git clone https://github.com/Jawarens/usb_port_watcher.git
+cd usb_port_watcher
+
+# Set up virtual environment and install requirements
+python -m venv .venv
+.\.venv\Scripts\activate
+pip install -r requirements.txt
+
+# Run application
+python main.py
 ```
 
 ---
